@@ -1,0 +1,167 @@
+snappy-java (1.1.8.3.1-1+dde) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>  Mon, 25 Jul 2022 16:38:04 +0800
+
+snappy-java (1.1.8.3.1-1+dde) unstable; urgency=medium
+
+  * Add sunway support.
+
+ -- Miao Changwei <miaochangwei@uniontech.com>  Mon, 16 May 2022 02:09:31 +0800
+
+snappy-java (1.1.8.3-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+    - Set the source/target level to Java 8
+  * Remove the prebuilt binaries from the upstream tarball
+  * Standards-Version updated to 4.5.1
+  * Switch to debhelper level 13
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 25 Jan 2021 09:56:08 +0100
+
+snappy-java (1.1.7.7-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+    - Refreshed the patch
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 16 Sep 2020 17:59:23 +0200
+
+snappy-java (1.1.7.5-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+  * Switch to debhelper level 12
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 15 Jun 2020 23:21:05 +0200
+
+snappy-java (1.1.7.3-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+  * Standards-Version updated to 4.5.0
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Sun, 26 Jan 2020 19:47:06 +0100
+
+snappy-java (1.1.7.2-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+  * Standards-Version updated to 4.2.1
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Fri, 05 Oct 2018 01:16:23 +0200
+
+snappy-java (1.1.7.1+dfsg-1) unstable; urgency=medium
+
+  * Turn exclusions of orig-tar.sh into Files-Excluded
+  * New upstream version
+  * debhelper 11
+  * Standards-Version: 4.1.4
+  * Build-Depends: maven-debian-helper
+  * Point Vcs-fields to Salsa
+  * Drop content of NOTICE file from d/copyright and add the file
+    separately
+  * d/rules:
+     - Drop get-orig-source target
+     - Do not set DEB_HOST_MULTIARCH
+     - Do not parse d/changelog
+     - hardening=+all
+
+ -- Andreas Tille <tille@debian.org>  Thu, 03 May 2018 08:38:10 +0200
+
+snappy-java (1.1.4-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+    - Refreshed the patch
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Tue, 20 Jun 2017 12:31:38 +0200
+
+snappy-java (1.1.2.6-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+  * Standards-Version updated to 3.9.8
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Fri, 08 Jul 2016 14:08:48 +0200
+
+snappy-java (1.1.2.4-3) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Tue, 05 Apr 2016 16:04:41 +0200
+
+snappy-java (1.1.2.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Standards-Version updated to 3.9.7 (no changes)
+  * Fixed the build failure when building only libsnappy-jni (with debuild -B)
+  * Use a secure Vcs-Git URL
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 25 Feb 2016 23:59:29 +0100
+
+snappy-java (1.1.2.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Fri, 29 Jan 2016 22:47:12 +0100
+
+snappy-java (1.1.2-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+    - Refreshed the patch
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 05 Oct 2015 09:37:51 +0200
+
+snappy-java (1.1.1.7-2) unstable; urgency=medium
+
+  * Team upload.
+  * Fix the build with ld --as-needed (Closes: #797558)
+
+ -- Matthias Klose <doko@ubuntu.com>  Mon, 31 Aug 2015 16:15:46 +0200
+
+snappy-java (1.1.1.7-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 29 Apr 2015 13:53:38 +0200
+
+snappy-java (1.1.1.6-2) unstable; urgency=medium
+
+  * Team upload.
+  * libsnappy-jni can now be built independently of libsnappy-java
+    (Closes: #780316)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 12 Mar 2015 16:32:11 +0100
+
+snappy-java (1.1.1.6-1) unstable; urgency=low
+
+  * Team upload.
+  * New upstream release
+  * Build and install the JNI bindings in libsnappy-jni (Closes: #734599)
+    - Removed the patches modifying the unused Makefile
+    - Removed the unused build dependency on xml-twig-tools
+  * Build with DH instead of CDBS
+  * Install the upstream changelog
+  * debian/control:
+    - Standards-Version updated to 3.9.6 (no changes)
+    - Use canonical URLs for the Vcs-* fields
+    - Updated the project URL
+  * debian/watch: Watch the release tags on Github
+  * Replaced debian/get-orig-source with debian/orig-tar.sh
+  * Use XZ compression for the upstream tarball
+  * Switch to debhelper level 9
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 26 Nov 2014 09:50:13 +0100
+
+snappy-java (1.0.4.1~dfsg-1) unstable; urgency=low
+
+  * Initial release. (Closes: #636181)
+
+ -- Charles Plessy <plessy@debian.org>  Fri, 30 Mar 2012 23:34:09 +0200

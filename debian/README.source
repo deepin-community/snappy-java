@@ -1,0 +1,14 @@
+In the original upstream archive, the file ‘lib/silk-weaver.jar’ is not
+accompanied with its source.  To simplify the process, and prevent
+accidental inclusion of more source-less files in future releases, the
+whole ‘lib’ directory is removed.
+
+Moreover the directory src/main/resources/org/xerial/snappy/native is
+removed as well because it contains binaries of a Debian packaged
+library for different OSes.  Due to the fact that we are using the
+Debian packaged version anyway all the files are removed.
+
+The prepraration of the according orig tarball can be done by using
+
+   make -f debian/rules get-orig-source
+

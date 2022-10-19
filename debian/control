@@ -1,0 +1,42 @@
+Source: snappy-java
+Section: java
+Priority: optional
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders:
+ Charles Plessy <plessy@debian.org>,
+ Andreas Tille <tille@debian.org>
+Build-Depends:
+ debhelper-compat (= 13),
+ libmaven-bundle-plugin-java,
+ libsnappy-dev,
+ maven-debian-helper
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/java-team/snappy-java
+Vcs-Git: https://salsa.debian.org/java-team/snappy-java.git
+Homepage: https://github.com/xerial/snappy-java
+
+Package: libsnappy-java
+Architecture: all
+Depends: ${misc:Depends}, ${maven:Depends}, libsnappy-jni
+Description: Snappy for Java, a fast compressor/decompresser
+ Java port of Snappy, a fast compresser/decompresser written in C++,
+ originally developed by Google.
+ .
+ Snappy's main target is very high-speed compression/decompression with
+ reasonable compression size. So the compression ratio of snappy-java is
+ modest and about the same as LZF (ranging 20%-100% according to the
+ dataset).
+
+Package: libsnappy-jni
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Snappy for Java, a fast compressor/decompresser (JNI library)
+ Java port of Snappy, a fast compresser/decompresser written in C++,
+ originally developed by Google.
+ .
+ Snappy's main target is very high-speed compression/decompression with
+ reasonable compression size. So the compression ratio of snappy-java is
+ modest and about the same as LZF (ranging 20%-100% according to the
+ dataset).
+ .
+ This package contains the architecture specific Java native interface part.

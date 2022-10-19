@@ -1,0 +1,14 @@
+Description: Load the native library from the library path
+Author: Emmanuel Bourg <ebourg@apache.org>
+Forwarded: not-needed
+--- a/src/main/java/org/xerial/snappy/SnappyLoader.java
++++ b/src/main/java/org/xerial/snappy/SnappyLoader.java
+@@ -319,7 +319,7 @@
+     static File findNativeLibrary()
+     {
+ 
+-        boolean useSystemLib = Boolean.parseBoolean(System.getProperty(KEY_SNAPPY_USE_SYSTEMLIB, "false"));
++        boolean useSystemLib = Boolean.parseBoolean(System.getProperty(KEY_SNAPPY_USE_SYSTEMLIB, "true"));
+         boolean disabledBundledLibs = Boolean
+                 .parseBoolean(System.getProperty(KEY_SNAPPY_DISABLE_BUNDLED_LIBS, "false"));
+         if (useSystemLib || disabledBundledLibs) {

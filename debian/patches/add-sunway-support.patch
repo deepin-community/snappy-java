@@ -1,0 +1,62 @@
+Description: add sunway support
+Author: Miao Changwei <miaochangwei@uniontech.com>
+
+---
+Last-Update: 2022-05-15
+
+--- snappy-java-1.1.8.3.orig/Makefile.common
++++ snappy-java-1.1.8.3/Makefile.common
+@@ -45,7 +45,7 @@ endif
+ 
+ # os=Default is meant to be generic unix/linux
+ 
+-known_os_archs := Linux-x86 Linux-x86_64 Linux-arm Linux-armv6 Linux-armv7 Linux-android-arm Linux-aarch64 Linux-ppc Linux-ppc64 Linux-ppc64le Linux-s390 Linux-s390x Mac-x86 Mac-x86_64 Mac-aarch64 FreeBSD-x86_64 Windows-x86 Windows-x86_64 SunOS-x86 SunOS-sparc SunOS-x86_64 AIX-ppc AIX-ppc64
++known_os_archs := Linux-x86 Linux-x86_64 Linux-arm Linux-armv6 Linux-armv7 Linux-android-arm Linux-aarch64 Linux-ppc Linux-ppc64 Linux-ppc64le Linux-s390 Linux-s390x Linux-sw64 Mac-x86 Mac-x86_64 Mac-aarch64 FreeBSD-x86_64 Windows-x86 Windows-x86_64 SunOS-x86 SunOS-sparc SunOS-x86_64 AIX-ppc AIX-ppc64
+ os_arch := $(OS_NAME)-$(OS_ARCH)
+ IBM_JDK_7 := $(findstring IBM, $(shell $(JAVA) -version 2>&1 | grep IBM | grep "JRE 1.7"))
+ 
+@@ -236,6 +236,13 @@ Linux-aarch64_LINKFLAGS := -shared -stat
+ Linux-aarch64_LIBNAME   := libsnappyjava.so
+ Linux-aarch64_SNAPPY_FLAGS:=
+ 
++Linux-sw64_CXX       := $(CROSS_PREFIX)g++
++Linux-sw64_STRIP     := $(CROSS_PREFIX)strip
++Linux-sw64_CXXFLAGS  := -Ilib/inc_linux -I$(JAVA_HOME)/include -O2 -fPIC -fvisibility=hidden -std=c++11
++Linux-sw64_LINKFLAGS := -shared -static-libgcc -static-libstdc++
++Linux-sw64_LIBNAME   := libsnappyjava.so
++Linux-sw64_SNAPPY_FLAGS:=
++
+ Mac-x86_CXX       := g++ -arch i386
+ Mac-x86_STRIP     := strip -x
+ Mac-x86_CXXFLAGS  := -Ilib/inc_mac -I$(JAVA_HOME)/include -O2 -fPIC -mmacosx-version-min=10.4 -fvisibility=hidden -std=c++11
+--- snappy-java-1.1.8.3.orig/build.sbt
++++ snappy-java-1.1.8.3/build.sbt
+@@ -94,6 +94,7 @@ OsgiKeys.additionalHeaders := Map(
+     "org/xerial/snappy/native/Linux/armv7/libsnappyjava.so;osname=linux;processor=arm_le",
+     "org/xerial/snappy/native/Linux/ppc64/libsnappyjava.so;osname=linux;processor=ppc64le",
+     "org/xerial/snappy/native/Linux/s390x/libsnappyjava.so;osname=linux;processor=s390x",
++    "org/xerial/snappy/native/Linux/sw64/libsnappyjava.so;osname=linux;processor=sw64",
+     "org/xerial/snappy/native/AIX/ppc/libsnappyjava.a;osname=aix;processor=ppc",
+     "org/xerial/snappy/native/AIX/ppc64/libsnappyjava.a;osname=aix;processor=ppc64",
+     "org/xerial/snappy/native/SunOS/x86/libsnappyjava.so;osname=sunos;processor=x86",
+--- snappy-java-1.1.8.3.orig/src/main/java/org/xerial/snappy/OSInfo.java
++++ snappy-java-1.1.8.3/src/main/java/org/xerial/snappy/OSInfo.java
+@@ -47,6 +47,7 @@ public class OSInfo {
+     public static final String IBMZ = "s390";
+     public static final String IBMZ_64 = "s390x";
+     public static final String AARCH_64 = "aarch64";
++    public static final String SW64 = "sw64";
+ 
+     static {
+         // x86 mappings
+@@ -93,6 +94,10 @@ public class OSInfo {
+ 
+         // Aarch64 mappings
+         archMapping.put(AARCH_64, AARCH_64);
++
++        // Sunway mappings
++        archMapping.put(SW64, SW64);
++        archMapping.put("sw_64", SW64);
+     }
+ 
+     public static void main(String[] args) {

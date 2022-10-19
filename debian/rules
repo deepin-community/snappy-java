@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+
+export JAVA_HOME := /usr/lib/jvm/default-java
+
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+%:
+	dh $@ --buildsystem=maven
+
+override_dh_auto_configure:
+	sed -e 's/%VERSION%/$(DEB_VERSION_UPSTREAM)/g' debian/pom.xml > pom.xml
+	dh_auto_configure
+
+override_dh_auto_build-arch:
+	# Build the JNI bindings
+	mkdir -p target
+	gcc $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) \
+	    -I$(JAVA_HOME)/include/ \
+	    -I$(JAVA_HOME)/include/linux \
+	    -fPIC -shared -Wall -g \
+	    -o target/libsnappyjava.so \
+	    src/main/java/org/xerial/snappy/SnappyNative.cpp -lsnappy
+
+override_dh_auto_test-arch:
+
+override_dh_auto_install-indep:
+	dh_auto_install
+	dh_installchangelogs -plibsnappy-java Milestone.md
+
+override_dh_auto_install-arch:
+	dh_install -plibsnappy-jni target/*.so usr/lib/$(DEB_HOST_MULTIARCH)/jni
+
+override_dh_auto_clean:
+	-dh_auto_clean
+	rm -f pom.xml
